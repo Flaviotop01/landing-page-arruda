@@ -188,7 +188,13 @@ ul { margin: 0; padding: 0; list-style: none; }
   gap: 12px;
   flex-shrink: 0;
 }
-.logo-mark svg { width: 36px; height: 36px; }
+.logo-img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 .logo-name {
   font-family: var(--sans);
   font-size: 15px;
@@ -1071,7 +1077,13 @@ a.contato-val:hover { color: var(--white); text-decoration: underline; }
   align-items: center;
   gap: 14px;
 }
-.footer-logo-mark svg { width: 40px; height: 40px; }
+.footer-logo-img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 .footer-name {
   font-family: var(--sans);
   font-size: 14px;
@@ -1195,6 +1207,7 @@ a.contato-val:hover { color: var(--white); text-decoration: underline; }
   .hamburger { display: flex; }
 
   .logo-sub { display: none; }
+  .logo-img { height: 45px; width: 45px; }
 
   .hero-layout {
     grid-template-columns: 1fr;
