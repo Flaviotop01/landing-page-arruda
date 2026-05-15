@@ -199,30 +199,34 @@ section { position: relative; }
 .hero {
   position: relative;
   padding-top: clamp(40px, 5vw, 72px);
-  padding-bottom: 0;
+  padding-bottom: clamp(0px, 0vw, 0px); /* strip já tem border-bottom */
+  overflow: hidden;
 }
 
 /* Desktop: 2 colunas — texto/stats à esquerda, imagem à direita */
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: 55fr 45fr;
+  grid-template-rows: 1fr auto;
   grid-template-areas:
     "head  image"
     "strip image";
-  gap: 0 clamp(32px, 4vw, 64px);
-  align-items: start;
+  gap: 0 clamp(32px, 4vw, 56px);
+  min-height: clamp(480px, 60vw, 680px);
 }
-.hero-head        { grid-area: head; }
-.hero-image-wrap  { grid-area: image; }
-.hero-strip       { grid-area: strip; }
+.hero-head        { grid-area: head; align-self: start; }
+.hero-image-wrap  { grid-area: image; align-self: stretch; }
+.hero-strip       { grid-area: strip; align-self: end; }
 
 /* Texto da esquerda — empilhado verticalmente */
 .hero-head {
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 3vw, 36px);
-  padding-bottom: clamp(24px, 3vw, 40px);
+  justify-content: flex-start;
+  gap: clamp(20px, 2.5vw, 32px);
+  padding-top: clamp(8px, 1vw, 16px);
+  padding-bottom: clamp(20px, 2.5vw, 32px);
+  padding-right: clamp(0px, 2vw, 24px);
 }
 
 .hero h1 {
@@ -277,19 +281,17 @@ section { position: relative; }
   margin-left: 4px;
 }
 
-/* Imagem: ocupa toda a altura das 2 linhas do grid */
+/* Imagem: estica para preencher as 2 linhas do grid */
 .hero-image-wrap {
   position: relative;
   overflow: hidden;
   border-radius: 2px;
   background: var(--bone-2);
-  height: 100%;
-  min-height: clamp(380px, 55vw, 580px);
 }
 .hero-image-wrap .img {
   width: 100%;
   height: 100%;
-  min-height: inherit;
+  min-height: clamp(440px, 58vw, 660px);
   background-size: cover;
   background-position: center;
   filter: saturate(0.92) contrast(0.98);
@@ -356,20 +358,23 @@ section { position: relative; }
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
     grid-template-areas:
       "head"
       "image"
       "strip";
-  }
-  .hero-image-wrap {
-    min-height: clamp(280px, 50vw, 420px);
-    height: auto;
-  }
-  .hero-image-wrap .img {
-    height: clamp(280px, 50vw, 420px);
     min-height: 0;
   }
-  .hero-strip { grid-template-columns: repeat(2, 1fr); }
+  .hero-head {
+    padding-right: 0;
+    padding-bottom: clamp(16px, 3vw, 28px);
+  }
+  .hero-image-wrap { align-self: auto; }
+  .hero-image-wrap .img { min-height: clamp(280px, 50vw, 420px); }
+  .hero-strip {
+    grid-template-columns: repeat(2, 1fr);
+    align-self: auto;
+  }
   .hero-strip .cell:nth-child(2) { border-right: none; }
   .hero-strip .cell:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
 }
