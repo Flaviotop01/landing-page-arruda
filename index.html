@@ -1,340 +1,511 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arruda Serviços – Supressão Vegetal e Terraplenagem</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Arruda Serviços – Supressão Vegetal e Terraplenagem desde 2001</title>
+  <meta name="description" content="Arruda Serviços: referência em supressão vegetal, terraplenagem, drenagem e gestão florestal desde 2001. Excelência operacional em todo o Brasil."/>
+  <meta property="og:title" content="Arruda Serviços – Infraestrutura e Gestão Florestal"/>
+  <meta property="og:description" content="Soluções profissionais em supressão vegetal, terraplenagem e infraestrutura desde 2001."/>
+  <meta property="og:image" content="assets/photos/excavator-toras.jpg"/>
+  <link rel="icon" href="assets/logo-arruda.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    /* ─── RESET ─── */
+    /* ══════════════════════════════════════════
+       RESET & BASE
+    ══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: #1a1a1a; background: #fff; line-height: 1.6; }
-    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; color: #2B292A; background: #fff; line-height: 1.65; overflow-x: hidden; }
+    img { display: block; width: 100%; object-fit: cover; }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    /* ─── TOKENS ─── */
+    /* ══════════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════════ */
     :root {
-      --green:      #2E7D32;
-      --green-dk:   #1B5E20;
-      --green-lt:   #43A047;
-      --gray-50:    #f9fafb;
-      --gray-100:   #f3f4f6;
-      --gray-200:   #e5e7eb;
-      --gray-500:   #6b7280;
-      --gray-700:   #374151;
-      --shadow-sm:  0 1px 3px rgba(0,0,0,.10);
-      --shadow-md:  0 4px 12px rgba(0,0,0,.10);
-      --shadow-lg:  0 10px 30px rgba(0,0,0,.12);
-      --r:  8px;
-      --rl: 12px;
+      --green:    #00A85A;
+      --green-dk: #007a42;
+      --red:      #EC3237;
+      --dark:     #2B292A;
+      --white:    #FFFFFF;
+      --gray-lt:  #F5F5F5;
+      --gray-md:  #CCCCCC;
+      --gray-txt: #666;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,.08);
+      --shadow-md: 0 8px 24px rgba(0,0,0,.12);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,.16);
+      --r: 10px;
+      --rl: 16px;
+      --transition: .3s cubic-bezier(.4,0,.2,1);
     }
 
-    /* ─── HELPERS ─── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .section    { padding: 80px 0; }
-    .green      { color: var(--green); }
+    /* ══════════════════════════════════════════
+       UTILITIES
+    ══════════════════════════════════════════ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+    .section    { padding: 96px 0; }
+    .section-alt { background: var(--gray-lt); }
+    .tag {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 12px;
+    }
+    .tag::before { content: '— '; }
+    h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; line-height: 1.15; }
+    h1 { font-size: clamp(2.2rem,5vw,3.6rem); font-weight: 700; }
+    h2 { font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 600; }
+    h3 { font-size: clamp(1.1rem,2vw,1.4rem); font-weight: 600; }
+    p  { font-size: clamp(.9rem,1.5vw,1.05rem); color: var(--gray-txt); line-height: 1.8; }
 
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 26px; border-radius: var(--r);
-      font-size: .9rem; font-weight: 600; cursor: pointer;
-      transition: all .2s; border: 2px solid transparent; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 32px; border-radius: var(--r);
+      font-family: 'Poppins', sans-serif;
+      font-size: .9rem; font-weight: 600; letter-spacing: .02em;
+      transition: all var(--transition); cursor: pointer; border: 2px solid transparent;
+      white-space: nowrap;
     }
-    .btn-green   { background: var(--green); color: #fff; }
-    .btn-green:hover { background: var(--green-dk); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-outline { background: transparent; color: #fff; border-color: #fff; }
-    .btn-outline:hover { background: rgba(255,255,255,.15); }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: var(--green-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,168,90,.35); }
+    .btn-outline-white { background: transparent; color: #fff; border-color: rgba(255,255,255,.8); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
+    .btn-outline-green { background: transparent; color: var(--green); border-color: var(--green); }
+    .btn-outline-green:hover { background: var(--green); color: #fff; transform: translateY(-2px); }
 
-    /* ─── FADE-IN ─── */
-    .fi { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-    .fi.in { opacity: 1; transform: none; }
-    .fi-d1 { transition-delay: .1s; }
-    .fi-d2 { transition-delay: .2s; }
-    .fi-d3 { transition-delay: .3s; }
-    .fi-d4 { transition-delay: .4s; }
+    /* ══════════════════════════════════════════
+       FADE-IN ON SCROLL
+    ══════════════════════════════════════════ */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.active { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: .1s; }
+    .reveal-d2 { transition-delay: .2s; }
+    .reveal-d3 { transition-delay: .3s; }
+    .reveal-d4 { transition-delay: .4s; }
 
-    /* ══════════════════════
-       NAVBAR
-    ══════════════════════ */
-    #navbar {
+    /* ══════════════════════════════════════════
+       HEADER / NAVBAR
+    ══════════════════════════════════════════ */
+    #header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: #fff; box-shadow: var(--shadow-sm);
-      height: 68px; display: flex; align-items: center;
+      height: 80px; display: flex; align-items: center;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.08);
+      transition: box-shadow var(--transition);
     }
-    .nav-inner {
+    #header.scrolled { box-shadow: var(--shadow-md); }
+    .nav-wrap {
       display: flex; align-items: center;
       justify-content: space-between; width: 100%;
-      max-width: 1200px; margin: 0 auto; padding: 0 24px;
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 800; font-size: 1rem; color: #1a1a1a; letter-spacing: -.2px;
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-name { font-family: 'Poppins',sans-serif; font-size: 1rem; font-weight: 700; color: var(--dark); }
+    .nav-logo-sub  { font-size: .62rem; font-weight: 600; color: var(--green); letter-spacing: .1em; text-transform: uppercase; margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a {
+      font-family: 'Poppins',sans-serif; font-size: .875rem; font-weight: 500;
+      color: var(--dark); transition: color var(--transition); position: relative;
     }
-    .nav-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .nav-logo-name { font-size: .95rem; font-weight: 800; color: #1a1a1a; }
-    .nav-logo-sub  { font-size: .65rem; font-weight: 600; color: var(--green); letter-spacing: .08em; text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--gray-700); transition: color .2s; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 2px; background: var(--green); transform: scaleX(0);
+      transform-origin: center; transition: transform var(--transition);
+    }
     .nav-links a:hover { color: var(--green); }
-    .nav-cta { padding: 10px 20px !important; font-size: .875rem !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: #1a1a1a; border-radius: 2px; }
-    .mobile-menu {
-      display: none; position: fixed; top: 68px; left: 0; right: 0;
-      background: #fff; padding: 20px 24px 28px; box-shadow: var(--shadow-lg);
-      z-index: 999; flex-direction: column; gap: 4px;
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta { padding: 11px 24px !important; font-size: .85rem !important; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      padding: 6px; border-radius: 6px; transition: background var(--transition);
     }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: .95rem; font-weight: 500; color: var(--gray-700); padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
-    .mobile-menu a:last-of-type { border: none; }
+    .hamburger:hover { background: var(--gray-lt); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all var(--transition); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ══════════════════════
+    /* Mobile menu */
+    .mobile-nav {
+      display: none; position: fixed; top: 80px; left: 0; right: 0;
+      background: #fff; border-top: 1px solid var(--gray-lt);
+      box-shadow: var(--shadow-lg); z-index: 999;
+      flex-direction: column; padding: 20px 28px 28px; gap: 0;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Poppins',sans-serif; font-size: 1rem; font-weight: 500;
+      color: var(--dark); padding: 14px 0; border-bottom: 1px solid var(--gray-lt);
+      transition: color var(--transition);
+    }
+    .mobile-nav a:hover { color: var(--green); }
+    .mobile-nav a:last-of-type { border: none; }
+    .mobile-nav .btn { margin-top: 16px; width: 100%; justify-content: center; }
+
+    /* ══════════════════════════════════════════
        HERO
-    ══════════════════════ */
+    ══════════════════════════════════════════ */
     #hero {
       position: relative;
-      min-height: 600px;
-      height: calc(100vh - 68px);
-      max-height: 700px;
+      min-height: 100vh;
       display: flex; align-items: center;
-      padding-top: 68px; overflow: hidden;
+      padding-top: 80px;
+      overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background-image: url('assets/photos/excavator-toras.jpg');
       background-size: cover; background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
     }
+    #hero.loaded .hero-bg { transform: scale(1); }
     .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(120deg, rgba(0,0,0,.75) 0%, rgba(27,94,32,.6) 100%);
+      background: linear-gradient(
+        105deg,
+        rgba(43,41,42,.82) 0%,
+        rgba(43,41,42,.6) 50%,
+        rgba(0,100,40,.35) 100%
+      );
     }
-    .hero-body { position: relative; z-index: 2; width: 100%; padding: 40px 0; }
-    .hero-content { max-width: 640px; }
-    .hero-title {
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      font-weight: 900; color: #fff; line-height: 1.1;
-      margin-bottom: 18px; letter-spacing: -.5px;
+    .hero-body { position: relative; z-index: 2; width: 100%; padding: 60px 0 80px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(0,168,90,.2);
+      border: 1px solid rgba(0,168,90,.4);
+      backdrop-filter: blur(8px);
+      color: #fff; font-size: .78rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 7px 18px; border-radius: 999px; margin-bottom: 28px;
     }
-    .hero-sub {
-      font-size: clamp(.95rem, 1.8vw, 1.1rem);
-      color: rgba(255,255,255,.85); margin-bottom: 32px; max-width: 520px;
+    .hero-badge-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.4} }
+    .hero-title { color: #fff; margin-bottom: 22px; max-width: 720px; }
+    .hero-title em { font-style: normal; color: #4cd98a; }
+    .hero-sub { color: rgba(255,255,255,.82); font-size: clamp(.95rem,1.8vw,1.15rem); max-width: 580px; margin-bottom: 40px; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 60px; }
+    .hero-stats {
+      display: flex; gap: 0;
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: var(--rl); overflow: hidden;
+      max-width: 520px;
     }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-stat {
+      flex: 1; padding: 20px 24px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num  { font-family:'Poppins',sans-serif; font-size: 1.7rem; font-weight: 700; color: #fff; line-height: 1; }
+    .hero-stat-label{ font-size: .68rem; color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: .06em; margin-top: 6px; }
+    .scroll-indicator {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.55); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent);
+      animation: scrollDown 1.8s ease infinite;
+    }
+    @keyframes scrollDown { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
 
-    /* ══════════════════════
+    /* ══════════════════════════════════════════
        SOBRE
-    ══════════════════════ */
+    ══════════════════════════════════════════ */
     #sobre { background: #fff; }
-    .sobre-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .sobre-img-wrap { position: relative; }
+    .sobre-img { height: 480px; border-radius: var(--rl); overflow: hidden; box-shadow: var(--shadow-lg); }
+    .sobre-img img { height: 100%; transition: transform .6s ease; }
+    .sobre-img:hover img { transform: scale(1.04); }
+    .sobre-accent {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--green); color: #fff;
+      padding: 20px 24px; border-radius: var(--r);
+      box-shadow: var(--shadow-lg); text-align: center;
     }
-    .sobre-img { border-radius: var(--rl); height: 380px; overflow: hidden; }
-    .sobre-img img { height: 100%; }
-    .sobre-tag { font-size: .72rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
-    .sobre-title { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
-    .sobre-desc { color: var(--gray-500); font-size: .95rem; line-height: 1.75; margin-bottom: 28px; }
-
-    .stats-row { display: flex; gap: 14px; margin-bottom: 32px; }
+    .sobre-accent-num   { font-family:'Poppins',sans-serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
+    .sobre-accent-label { font-size: .72rem; font-weight: 500; opacity: .9; margin-top: 4px; }
+    .sobre-text h2 { color: var(--dark); margin-bottom: 20px; }
+    .sobre-text p  { margin-bottom: 16px; }
+    .sobre-stats { display: flex; gap: 16px; margin: 32px 0; }
     .stat-card {
       flex: 1; background: var(--green); border-radius: var(--r);
-      padding: 16px 12px; text-align: center;
+      padding: 20px 16px; text-align: center;
+      box-shadow: 0 6px 20px rgba(0,168,90,.25);
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    .stat-icon { width: 36px; height: 36px; background: rgba(255,255,255,.2); border-radius: var(--r); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
-    .stat-icon svg { width: 18px; height: 18px; fill: #fff; }
-    .stat-num   { font-size: 1.4rem; font-weight: 900; color: #fff; line-height: 1; }
-    .stat-label { font-size: .65rem; color: rgba(255,255,255,.85); margin-top: 4px; text-transform: uppercase; letter-spacing: .04em; }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,168,90,.35); }
+    .stat-icon { width: 40px; height: 40px; background: rgba(255,255,255,.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+    .stat-icon svg { width: 20px; height: 20px; fill: #fff; }
+    .stat-num   { font-family:'Poppins',sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .stat-label { font-size: .65rem; color: rgba(255,255,255,.85); text-transform: uppercase; letter-spacing: .05em; margin-top: 4px; }
 
-    .mvv-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border-top: 1px solid var(--gray-200); padding-top: 28px; }
-    .mvv-item { padding: 0 20px 0 0; }
-    .mvv-item:not(:last-child) { border-right: 1px solid var(--gray-200); margin-right: 20px; }
-    .mvv-icon { width: 44px; height: 44px; background: #e8f5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-    .mvv-icon svg { width: 22px; height: 22px; fill: var(--green); }
-    .mvv-title { font-size: .875rem; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
-    .mvv-desc  { font-size: .75rem; color: var(--gray-500); line-height: 1.6; }
+    /* ══════════════════════════════════════════
+       MVV
+    ══════════════════════════════════════════ */
+    #mvv { background: var(--gray-lt); }
+    .mvv-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .mvv-card {
+      background: #fff; border-radius: var(--rl); padding: 36px 28px;
+      border-top: 4px solid var(--green);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .mvv-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .mvv-icon { width: 52px; height: 52px; background: #e6f7f0; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .mvv-icon svg { width: 26px; height: 26px; fill: var(--green); }
+    .mvv-card h3 { font-size: 1.15rem; color: var(--dark); margin-bottom: 14px; }
+    .mvv-card p  { font-size: .9rem; }
+    .mvv-valores { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .mvv-tag {
+      font-size: .75rem; font-weight: 600; color: var(--green);
+      background: #e6f7f0; padding: 5px 12px; border-radius: 999px;
+    }
 
-    /* ══════════════════════
+    /* ══════════════════════════════════════════
        SERVIÇOS
-    ══════════════════════ */
-    #servicos { background: var(--gray-50); }
-    .sec-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; text-align: center; margin-bottom: 8px; }
-    .sec-sub   { text-align: center; color: var(--gray-500); font-size: .95rem; margin-bottom: 48px; }
-
-    .servicos-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 16px; }
+    ══════════════════════════════════════════ */
+    #servicos { background: #fff; }
+    .sec-head { text-align: center; margin-bottom: 56px; }
+    .sec-head h2 { color: var(--dark); margin-bottom: 14px; }
+    .sec-head p  { max-width: 580px; margin: 0 auto; }
+    .servicos-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
     .serv-card {
-      background: #fff; border-radius: var(--rl); overflow: hidden;
-      box-shadow: var(--shadow-sm); transition: transform .25s, box-shadow .25s;
+      display: flex; gap: 20px; align-items: flex-start;
+      background: #fff; border-radius: var(--r);
+      padding: 28px 24px;
+      border-left: 4px solid var(--green);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    .serv-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-    .serv-img { height: 140px; position: relative; }
-    .serv-img img { height: 100%; }
-    .serv-icon {
-      position: absolute; bottom: -16px; left: 14px;
-      width: 36px; height: 36px; background: var(--green); border-radius: var(--r);
-      display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md);
+    .serv-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .serv-icon-wrap {
+      width: 54px; height: 54px; background: #e6f7f0;
+      border-radius: var(--r); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+      transition: background var(--transition);
     }
-    .serv-icon svg { width: 18px; height: 18px; fill: #fff; }
-    .serv-body { padding: 24px 14px 16px; }
-    .serv-title { font-size: .82rem; font-weight: 700; margin-bottom: 6px; }
-    .serv-desc  { font-size: .72rem; color: var(--gray-500); line-height: 1.55; }
+    .serv-card:hover .serv-icon-wrap { background: var(--green); }
+    .serv-icon-wrap svg { width: 26px; height: 26px; fill: var(--green); transition: fill var(--transition); }
+    .serv-card:hover .serv-icon-wrap svg { fill: #fff; }
+    .serv-body h3 { font-size: 1rem; color: var(--dark); margin-bottom: 8px; }
+    .serv-body p  { font-size: .875rem; line-height: 1.7; }
 
-    /* ══════════════════════
+    /* ══════════════════════════════════════════
        PORTFÓLIO
-    ══════════════════════ */
-    #portfolio { background: #fff; }
-    .portfolio-grid {
-      display: grid; grid-template-columns: repeat(5,1fr);
-      grid-template-rows: repeat(2,160px); gap: 10px;
+    ══════════════════════════════════════════ */
+    #portfolio { background: var(--gray-lt); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .port-item {
+      border-radius: var(--r); overflow: hidden; position: relative;
+      cursor: pointer; aspect-ratio: 4/3;
     }
-    .port-item { border-radius: var(--r); overflow: hidden; cursor: pointer; }
-    .port-item img { transition: transform .35s; }
-    .port-item:hover img { transform: scale(1.06); }
-
-    /* ══════════════════════
-       POR QUE ESCOLHER
-    ══════════════════════ */
-    #porque { background: var(--green-dk); padding: 80px 0; }
-    .porque-title { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; color: #fff; text-align: center; margin-bottom: 52px; }
-    .porque-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
-    .porque-card { text-align: center; }
-    .porque-icon {
-      width: 64px; height: 64px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1);
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    .port-item img { height: 100%; transition: transform .5s ease; }
+    .port-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: rgba(0,168,90,.0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
     }
-    .porque-icon svg { width: 28px; height: 28px; fill: #fff; }
-    .porque-card-title { font-size: .95rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .porque-card-desc  { font-size: .82rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+    .port-overlay svg { width: 40px; height: 40px; fill: #fff; opacity: 0; transform: scale(.7); transition: all var(--transition); }
+    .port-item:hover img { transform: scale(1.08); }
+    .port-item:hover .port-overlay { background: rgba(0,100,40,.55); }
+    .port-item:hover .port-overlay svg { opacity: 1; transform: scale(1); }
 
-    /* ══════════════════════
+    /* ══════════════════════════════════════════
+       DIFERENCIAIS
+    ══════════════════════════════════════════ */
+    #diferenciais { background: var(--green); padding: 80px 0; }
+    .dif-title { font-family:'Poppins',sans-serif; font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 600; color: #fff; text-align: center; margin-bottom: 56px; }
+    .dif-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
+    .dif-card { text-align: center; }
+    .dif-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .dif-card:hover .dif-icon { background: rgba(255,255,255,.25); border-color: rgba(255,255,255,.6); }
+    .dif-icon svg { width: 32px; height: 32px; fill: #fff; }
+    .dif-card h3 { font-size: 1.05rem; color: #fff; margin-bottom: 10px; }
+    .dif-card p  { font-size: .875rem; color: rgba(255,255,255,.8); line-height: 1.65; }
+
+    /* ══════════════════════════════════════════
        CONTATO
-    ══════════════════════ */
-    #contato { background: var(--gray-50); }
-    .contato-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: start; }
-    .form-title { font-size: clamp(1.3rem,2.5vw,1.8rem); font-weight: 800; color: var(--green); margin-bottom: 6px; }
-    .form-sub   { color: var(--gray-500); font-size: .9rem; margin-bottom: 24px; }
-    .form-row3  { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 12px; }
-    .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
-    .form-group label { font-size: .75rem; font-weight: 600; color: var(--gray-700); }
+    ══════════════════════════════════════════ */
+    #contato { background: #fff; }
+    .contato-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 72px; align-items: start; }
+    .form-wrap h2  { color: var(--dark); margin-bottom: 10px; }
+    .form-wrap > p { margin-bottom: 32px; }
+    .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: .78rem; font-weight: 600; color: var(--dark); letter-spacing: .02em; }
     .form-group input,
-    .form-group textarea {
-      border: 1.5px solid var(--gray-200); border-radius: var(--r);
-      padding: 11px 13px; font-size: .875rem; font-family: inherit;
-      color: #1a1a1a; background: #fff; outline: none; transition: border-color .2s;
+    .form-group textarea,
+    .form-group select {
+      border: 1.5px solid var(--gray-md); border-radius: var(--r);
+      padding: 13px 16px; font-size: .9rem; font-family: 'Inter', sans-serif;
+      color: var(--dark); background: #fff; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
     }
     .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(46,125,50,.08); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-check { display: flex; align-items: center; gap: 10px; font-size: .82rem; color: var(--gray-500); margin-bottom: 18px; cursor: pointer; }
-    .form-check input { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; }
-    .btn-submit { width: 100%; justify-content: center; font-size: .95rem; padding: 14px; }
+    .form-group textarea:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(0,168,90,.1); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-check { display: flex; align-items: center; gap: 10px; font-size: .82rem; color: var(--gray-txt); cursor: pointer; margin-bottom: 20px; }
+    .form-check input { width: 16px; height: 16px; accent-color: var(--green); }
+    .btn-submit { width: 100%; justify-content: center; font-size: 1rem; padding: 16px; }
+    #formMsg { display: none; margin-top: 14px; padding: 14px 18px; border-radius: var(--r); font-size: .875rem; }
 
-    .info-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 22px; }
-    .info-list  { display: flex; flex-direction: column; gap: 18px; margin-bottom: 24px; }
-    .info-item  { display: flex; align-items: flex-start; gap: 14px; }
-    .info-icon  { width: 42px; height: 42px; background: var(--green); border-radius: var(--r); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .info-icon svg { width: 18px; height: 18px; fill: #fff; }
-    .info-lbl { font-size: .68rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
-    .info-val { font-size: .875rem; font-weight: 500; }
-    .info-img { border-radius: var(--rl); overflow: hidden; height: 160px; margin-top: 4px; }
-    .info-img img { height: 100%; }
-    #formMsg { display: none; margin-top: 12px; padding: 12px 16px; border-radius: var(--r); font-size: .85rem; }
-
-    /* ══════════════════════
-       FOOTER
-    ══════════════════════ */
-    footer { background: var(--green-dk); padding: 56px 0 0; }
-    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 40px; padding-bottom: 48px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-    .footer-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-    .footer-logo-text { font-size: .95rem; font-weight: 800; color: #fff; }
-    .footer-logo-text span { color: #81C784; }
-    .footer-tagline { font-size: .82rem; color: rgba(255,255,255,.6); line-height: 1.65; }
-    .footer-col-title { font-size: .7rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 18px; }
-    .footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a { font-size: .85rem; color: rgba(255,255,255,.7); transition: color .2s; }
-    .footer-links a:hover { color: #fff; }
-    .social-row { display: flex; gap: 10px; }
-    .social-btn {
-      width: 36px; height: 36px; border-radius: var(--r); background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center;
-      justify-content: center; transition: background .2s;
+    .info-side h3 { font-size: 1.4rem; color: var(--dark); margin-bottom: 28px; }
+    .info-list { display: flex; flex-direction: column; gap: 22px; margin-bottom: 32px; }
+    .info-item { display: flex; align-items: flex-start; gap: 16px; }
+    .info-icon-wrap { width: 48px; height: 48px; background: #e6f7f0; border-radius: var(--r); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .info-icon-wrap svg { width: 22px; height: 22px; fill: var(--green); }
+    .info-lbl { font-size: .7rem; font-weight: 700; color: var(--gray-txt); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+    .info-val { font-size: .9rem; font-weight: 500; color: var(--dark); }
+    .whatsapp-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: #25d366; color: #fff; padding: 14px 24px;
+      border-radius: var(--r); font-family: 'Poppins',sans-serif;
+      font-size: .9rem; font-weight: 600; margin-bottom: 28px;
+      transition: all var(--transition);
     }
-    .social-btn:hover { background: rgba(255,255,255,.25); }
-    .social-btn svg { width: 16px; height: 16px; fill: #fff; }
-    .footer-contact { display: flex; flex-direction: column; gap: 12px; }
-    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; }
-    .footer-contact-icon { width: 14px; height: 14px; fill: #81C784; flex-shrink: 0; margin-top: 3px; }
-    .footer-contact-text { font-size: .82rem; color: rgba(255,255,255,.75); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); padding: 18px 0; text-align: center; font-size: .78rem; color: rgba(255,255,255,.45); }
+    .whatsapp-btn:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,.35); }
+    .whatsapp-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+    .social-row { display: flex; gap: 12px; }
+    .soc-btn {
+      width: 42px; height: 42px; border-radius: var(--r);
+      background: var(--gray-lt); border: 1px solid var(--gray-md);
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+    }
+    .soc-btn:hover { background: var(--green); border-color: var(--green); }
+    .soc-btn svg { width: 18px; height: 18px; fill: var(--gray-txt); transition: fill var(--transition); }
+    .soc-btn:hover svg { fill: #fff; }
 
-    /* ══════════════════════
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer { background: var(--dark); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 48px; padding-bottom: 56px; }
+    .foot-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .foot-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .foot-logo-text { font-family:'Poppins',sans-serif; font-size: 1rem; font-weight: 700; color: #fff; }
+    .foot-logo-text span { color: var(--green); }
+    .foot-tagline { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.7; }
+    .foot-col-title { font-family:'Poppins',sans-serif; font-size: .7rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 20px; }
+    .foot-links { display: flex; flex-direction: column; gap: 10px; }
+    .foot-links a { font-size: .875rem; color: rgba(255,255,255,.6); transition: color var(--transition); }
+    .foot-links a:hover { color: var(--green); }
+    .foot-social { display: flex; gap: 10px; }
+    .foot-soc {
+      width: 38px; height: 38px; border-radius: var(--r);
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+    }
+    .foot-soc:hover { background: var(--green); border-color: var(--green); }
+    .foot-soc svg { width: 16px; height: 16px; fill: rgba(255,255,255,.7); transition: fill var(--transition); }
+    .foot-soc:hover svg { fill: #fff; }
+    .foot-contact { display: flex; flex-direction: column; gap: 14px; }
+    .foot-contact-item { display: flex; align-items: flex-start; gap: 10px; }
+    .foot-contact-icon { width: 14px; height: 14px; fill: var(--green); flex-shrink: 0; margin-top: 3px; }
+    .foot-contact-text { font-size: .83rem; color: rgba(255,255,255,.65); line-height: 1.5; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 20px 0; display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .footer-bottom span { font-size: .78rem; color: rgba(255,255,255,.4); }
+
+    /* ══════════════════════════════════════════
        RESPONSIVE
-    ══════════════════════ */
+    ══════════════════════════════════════════ */
     @media (max-width: 1024px) {
-      .servicos-grid { grid-template-columns: repeat(3,1fr); }
-      .portfolio-grid { grid-template-columns: repeat(4,1fr); grid-template-rows: repeat(3,150px); }
-      .porque-grid { grid-template-columns: repeat(2,1fr); }
+      .sobre-grid { gap: 48px; }
+      .dif-grid { grid-template-columns: repeat(2,1fr); gap: 28px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
-      .section { padding: 56px 0; }
+      .section { padding: 64px 0; }
+      #header { height: 64px; }
+      .mobile-nav { top: 64px; }
       .nav-links, .nav-cta { display: none !important; }
       .hamburger { display: flex; }
-      .sobre-grid { grid-template-columns: 1fr; gap: 32px; }
-      .stats-row { gap: 10px; }
-      .mvv-row { grid-template-columns: 1fr; gap: 20px; }
-      .mvv-item:not(:last-child) { border-right: none; border-bottom: 1px solid var(--gray-200); padding-bottom: 20px; margin-bottom: 0; margin-right: 0; }
-      .servicos-grid { grid-template-columns: repeat(2,1fr); }
-      .portfolio-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(5,140px); }
-      .porque-grid { grid-template-columns: 1fr 1fr; }
-      .contato-grid { grid-template-columns: 1fr; gap: 36px; }
-      .form-row3 { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      #hero { padding-top: 64px; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+      .sobre-accent { right: 0; }
+      .sobre-stats { flex-direction: column; gap: 12px; }
+      .mvv-grid { grid-template-columns: 1fr; }
+      .servicos-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: repeat(2,1fr); }
+      .dif-grid { grid-template-columns: 1fr 1fr; }
+      .contato-grid { grid-template-columns: 1fr; gap: 48px; }
+      .form-row2 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .hero-stats { flex-direction: column; border-radius: var(--r); }
+      .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,.15); }
+      .hero-stat:last-child { border-bottom: none; }
     }
     @media (max-width: 480px) {
-      .servicos-grid { grid-template-columns: 1fr; }
-      .porque-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: 1.85rem; }
+      .dif-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      .hero-btns .btn { width: 100%; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══════ NAVBAR ══════ -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <img src="assets/logo-arruda.png" alt="Arruda Serviços logo" />
-      <div class="nav-logo-text">
-        <span class="nav-logo-name">ARRUDA</span>
-        <span class="nav-logo-sub">Serviços</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#servicos">Serviços</a></li>
-      <li><a href="#portfolio">Portfólio</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
-    <a href="#contato" class="btn btn-green nav-cta">Solicitar Orçamento</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+<!-- ══════ HEADER ══════ -->
+<header id="header">
+  <div class="container">
+    <nav class="nav-wrap">
+      <a href="#" class="nav-logo">
+        <img src="assets/logo-arruda.png" alt="Logo Arruda Serviços"/>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">ARRUDA</span>
+          <span class="nav-logo-sub">Serviços</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#portfolio">Obras</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <a href="#contato" class="btn btn-primary nav-cta">Solicitar Orçamento</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
   </div>
-</nav>
+</header>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#sobre" class="ml">Sobre</a>
-  <a href="#servicos" class="ml">Serviços</a>
-  <a href="#portfolio" class="ml">Portfólio</a>
-  <a href="#contato" class="ml">Contato</a>
-  <a href="#contato" class="btn btn-green" style="margin-top:8px;justify-content:center;">Solicitar Orçamento</a>
-</div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#sobre">Sobre</a>
+  <a href="#servicos">Serviços</a>
+  <a href="#portfolio">Obras</a>
+  <a href="#diferenciais">Diferenciais</a>
+  <a href="#contato">Contato</a>
+  <a href="#contato" class="btn btn-primary">Solicitar Orçamento</a>
+</nav>
 
 <!-- ══════ HERO ══════ -->
 <section id="hero">
@@ -342,22 +513,42 @@
   <div class="hero-overlay"></div>
   <div class="hero-body">
     <div class="container">
-      <div class="hero-content fi">
-        <h1 class="hero-title">
-          Soluções Profissionais<br/>
-          em Supressão Vegetal<br/>
-          e Terraplenagem
-        </h1>
-        <p class="hero-sub">
-          Desde 2001, a Arruda Serviços oferece excelência em serviços
-          de infraestrutura e gestão florestal
-        </p>
-        <div class="hero-btns">
-          <a href="#servicos" class="btn btn-green">Conheça Nossos Serviços</a>
-          <a href="#portfolio" class="btn btn-outline">Ver Portfólio</a>
+      <div class="hero-badge reveal">
+        <span class="hero-badge-dot"></span>
+        Desde 2001 no mercado brasileiro
+      </div>
+      <h1 class="hero-title reveal reveal-d1">
+        Soluções Profissionais em<br/>
+        <em>Supressão Vegetal</em><br/>
+        e Terraplenagem
+      </h1>
+      <p class="hero-sub reveal reveal-d2">
+        Desde 2001, a Arruda Serviços entrega excelência em infraestrutura,
+        gestão florestal e operações de alta performance em todo o Brasil.
+      </p>
+      <div class="hero-btns reveal reveal-d3">
+        <a href="#contato" class="btn btn-primary">Solicitar Orçamento</a>
+        <a href="#portfolio" class="btn btn-outline-white">Ver Portfólio</a>
+      </div>
+      <div class="hero-stats reveal reveal-d4">
+        <div class="hero-stat">
+          <div class="hero-stat-num">20+</div>
+          <div class="hero-stat-label">Anos de Experiência</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Projetos Executados</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Foco em Qualidade</div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
   </div>
 </section>
 
@@ -365,25 +556,22 @@
 <section id="sobre" class="section">
   <div class="container">
     <div class="sobre-grid">
-
-      <!-- Imagem esquerda -->
-      <div class="sobre-img fi">
-        <img src="assets/photos/equipe-campo.jpg" alt="Equipe Arruda Serviços" loading="lazy" />
+      <div class="sobre-img-wrap reveal">
+        <div class="sobre-img">
+          <img src="assets/photos/equipe-campo.jpg" alt="Equipe Arruda Serviços" loading="lazy"/>
+        </div>
+        <div class="sobre-accent">
+          <div class="sobre-accent-num">2001</div>
+          <div class="sobre-accent-label">Fundada em</div>
+        </div>
       </div>
-
-      <!-- Texto direita -->
-      <div class="fi fi-d1">
-        <p class="sobre-tag">Quem Somos</p>
-        <h2 class="sobre-title">Sobre a <span class="green">Arruda Serviços</span></h2>
-        <p class="sobre-desc">
-          Atuando desde 2001 no mercado brasileiro com presença dominante na região Sudeste,
-          a Arruda Serviços é referência em excelência e qualidade. Nosso corpo técnico altamente
-          capacitado, frota própria diversificada e compromisso com a segurança e organização nos
-          posicionam como parceiros confiáveis para projetos de infraestrutura e gestão florestal.
-        </p>
-
-        <!-- Stats -->
-        <div class="stats-row">
+      <div class="sobre-text reveal reveal-d1">
+        <span class="tag">Quem Somos</span>
+        <h2>Sobre a <span style="color:var(--green)">Arruda Serviços</span></h2>
+        <p>Atuando desde 2001 no mercado brasileiro, a Arruda Serviços se consolidou como referência em soluções de infraestrutura, supressão vegetal, terraplenagem e gestão florestal.</p>
+        <p>Com forte presença na região Sudeste e atuação em todo o território nacional, nossa empresa reúne experiência, equipe altamente qualificada, frota moderna e compromisso absoluto com qualidade, segurança e eficiência operacional.</p>
+        <p>Cada projeto é conduzido com foco em excelência, organização e respeito ao meio ambiente.</p>
+        <div class="sobre-stats">
           <div class="stat-card">
             <div class="stat-icon">
               <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
@@ -396,46 +584,58 @@
               <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             </div>
             <div class="stat-num">500+</div>
-            <div class="stat-label">Projetos Realizados</div>
+            <div class="stat-label">Projetos Executados</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             </div>
             <div class="stat-num">100%</div>
-            <div class="stat-label">Satisfação do Cliente</div>
-          </div>
-        </div>
-
-        <!-- MVV -->
-        <div class="mvv-row">
-          <div class="mvv-item">
-            <div class="mvv-icon">
-              <!-- Alvo -->
-              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-12c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
-            </div>
-            <div class="mvv-title">Missão</div>
-            <p class="mvv-desc">Proporcionar soluções em obras do setor florestal e de infraestrutura, atender as necessidades do cliente com excelência e comprometer-se com a sociedade e o meio ambiente.</p>
-          </div>
-          <div class="mvv-item">
-            <div class="mvv-icon">
-              <!-- Olho -->
-              <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-            </div>
-            <div class="mvv-title">Visão</div>
-            <p class="mvv-desc">Ser uma empresa reconhecida pela agilidade e qualidade no segmento florestal e de infraestrutura.</p>
-          </div>
-          <div class="mvv-item">
-            <div class="mvv-icon">
-              <!-- Diamante -->
-              <svg viewBox="0 0 24 24"><path d="M19 3H5L2 9l10 12L22 9l-3-6zm-8.5 0h5L17 7H7l3.5-4zM5.66 9h12.69l-6.35 7.56L5.66 9zm.9-2L8.5 5h7l1.94 2H6.56z"/></svg>
-            </div>
-            <div class="mvv-title">Valores</div>
-            <p class="mvv-desc">Integridade, honestidade e respeito. Apreço ao ser humano e ao meio ambiente. Segurança, agilidade, transparência. Tradição, Excelência, Competência.</p>
+            <div class="stat-label">Compromisso com Qualidade</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
+<!-- ══════ MISSÃO VISÃO VALORES ══════ -->
+<section id="mvv" class="section section-alt">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="tag">Nossa Essência</span>
+      <h2>Missão, Visão e <span style="color:var(--green)">Valores</span></h2>
+    </div>
+    <div class="mvv-grid">
+      <div class="mvv-card reveal">
+        <div class="mvv-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-12c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+        </div>
+        <h3>Missão</h3>
+        <p>Entregar soluções em obras florestais e infraestrutura com excelência, responsabilidade e compromisso com a sociedade e o meio ambiente.</p>
+      </div>
+      <div class="mvv-card reveal reveal-d1">
+        <div class="mvv-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        </div>
+        <h3>Visão</h3>
+        <p>Ser referência nacional em qualidade, agilidade e eficiência no segmento florestal e de infraestrutura.</p>
+      </div>
+      <div class="mvv-card reveal reveal-d2">
+        <div class="mvv-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5L2 9l10 12L22 9l-3-6zm-8.5 0h5L17 7H7l3.5-4zM5.66 9h12.69l-6.35 7.56L5.66 9zm.9-2L8.5 5h7l1.94 2H6.56z"/></svg>
+        </div>
+        <h3>Valores</h3>
+        <div class="mvv-valores">
+          <span class="mvv-tag">Integridade</span>
+          <span class="mvv-tag">Honestidade</span>
+          <span class="mvv-tag">Respeito</span>
+          <span class="mvv-tag">Segurança</span>
+          <span class="mvv-tag">Transparência</span>
+          <span class="mvv-tag">Excelência</span>
+          <span class="mvv-tag">Sustentabilidade</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -443,144 +643,151 @@
 <!-- ══════ SERVIÇOS ══════ -->
 <section id="servicos" class="section">
   <div class="container">
-    <h2 class="sec-title fi">Nossos <span class="green">Serviços</span></h2>
-    <p class="sec-sub fi fi-d1">Soluções completas para obras de infraestrutura e gestão florestal</p>
+    <div class="sec-head reveal">
+      <span class="tag">O Que Fazemos</span>
+      <h2>Nossos <span style="color:var(--green)">Serviços</span></h2>
+      <p>Soluções completas para projetos de infraestrutura e gestão florestal em todo o Brasil.</p>
+    </div>
     <div class="servicos-grid">
-
-      <div class="serv-card fi">
-        <div class="serv-img">
-          <img src="assets/photos/silvicultura-plantio.jpg" alt="Supressão Vegetal" loading="lazy"/>
-          <div class="serv-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.34L5.71 21l1-1C7.38 19.33 7.5 19 8 19h1c4 0 5-3 8-3 1.66 0 3-.17 3-2 0-2.5-1.5-6-3-6z"/></svg>
-          </div>
+      <div class="serv-card reveal">
+        <div class="serv-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.34L5.71 21l1-1C7.38 19.33 7.5 19 8 19h1c4 0 5-3 8-3 1.66 0 3-.17 3-2 0-2.5-1.5-6-3-6z"/></svg>
         </div>
         <div class="serv-body">
-          <h3 class="serv-title">Supressão Vegetal</h3>
-          <p class="serv-desc">Serviço inicial necessário para instalação de empreendimentos em áreas com vegetação, sempre respeitando a legislação ambiental brasileira.</p>
+          <h3>Supressão Vegetal</h3>
+          <p>Execução técnica especializada para preparação de áreas destinadas a empreendimentos, sempre respeitando a legislação ambiental.</p>
         </div>
       </div>
-
-      <div class="serv-card fi fi-d1">
-        <div class="serv-img">
-          <img src="assets/photos/rocada-trator.jpg" alt="Terraplenagem" loading="lazy"/>
-          <div class="serv-icon">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-          </div>
+      <div class="serv-card reveal reveal-d1">
+        <div class="serv-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
         </div>
         <div class="serv-body">
-          <h3 class="serv-title">Terraplenagem</h3>
-          <p class="serv-desc">Possui a função de nivelar e compactar o solo, apertiçoando e desbastando-o apto para suportar toda a estrutura da construção que será erguida no local.</p>
+          <h3>Terraplenagem</h3>
+          <p>Nivelamento, compactação e preparação de terrenos para receber estruturas com máxima segurança e estabilidade.</p>
         </div>
       </div>
-
-      <div class="serv-card fi fi-d2">
-        <div class="serv-img">
-          <img src="assets/photos/barragem-manutencao.jpg" alt="Drenagem" loading="lazy"/>
-          <div class="serv-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/></svg>
-          </div>
+      <div class="serv-card reveal reveal-d1">
+        <div class="serv-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/></svg>
         </div>
         <div class="serv-body">
-          <h3 class="serv-title">Drenagem</h3>
-          <p class="serv-desc">Por definição, o ato de drenar consiste em fazer com que as águas escoem, evitando o acúmulo de novos volumes, por meio da chuva. Com o uso adequado é um elemento que impede que os terrenos fiquem excessivamente molhados.</p>
+          <h3>Drenagem</h3>
+          <p>Soluções eficientes para escoamento e controle hídrico, evitando acúmulos e preservando a integridade do terreno.</p>
         </div>
       </div>
-
-      <div class="serv-card fi fi-d1">
-        <div class="serv-img">
-          <img src="assets/photos/patio-toras.jpg" alt="Compactação" loading="lazy"/>
-          <div class="serv-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 15h16v-2H4v2zm0 4h16v-2H4v2zm0-8h16V9H4v2zm0-6v2h16V5H4z"/></svg>
-          </div>
+      <div class="serv-card reveal reveal-d2">
+        <div class="serv-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M4 15h16v-2H4v2zm0 4h16v-2H4v2zm0-8h16V9H4v2zm0-6v2h16V5H4z"/></svg>
         </div>
         <div class="serv-body">
-          <h3 class="serv-title">Compactação</h3>
-          <p class="serv-desc">Possui a função de nivelar e compactar o solo, apertiçoando e drenando-o apto para suportar toda a estrutura da construção que será erguida no local.</p>
+          <h3>Compactação</h3>
+          <p>Compactação profissional do solo para garantir resistência estrutural e desempenho operacional em longo prazo.</p>
         </div>
       </div>
-
-      <div class="serv-card fi fi-d2">
-        <div class="serv-img">
-          <img src="assets/photos/colheita-harvester.jpg" alt="Limpeza de Fundação" loading="lazy"/>
-          <div class="serv-icon">
-            <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.36C18 2.06 15.96 0 13.5 0c-1.3 0-2.4.56-3.18 1.44L9 3 7.68 1.44C6.9.56 5.8 0 4.5 0 2.04 0 0 2.06 0 4.64c0 .48.11.92.18 1.36H0v2h2v12h20V8h-2V6zm-6.5-4c1.36 0 2.5 1.16 2.5 2.64 0 .48-.14.94-.34 1.36H8.34C8.14 5.58 8 5.12 8 4.64 8 3.16 9.14 2 10.5 2h3zM20 18H4V8h16v10z"/></svg>
-          </div>
+      <div class="serv-card reveal reveal-d2">
+        <div class="serv-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M15.5 2C13.57 2 12 3.57 12 5.5V8H7v14h12V8h-2.17C17.4 7.35 17.5 6.93 17.5 6.5 17.5 4.01 15.99 2 15.5 2zM13 6.5C13 4.57 14.07 4 14.5 4S16 4.57 16 6.5c0 .35-.06.69-.17 1H13V6.5z"/></svg>
         </div>
         <div class="serv-body">
-          <h3 class="serv-title">Limpeza de Fundação</h3>
-          <p class="serv-desc">Esse procedimento consiste, basicamente, na limpeza e remoção de material saturado até atingir o solo resistente.</p>
+          <h3>Limpeza de Fundação</h3>
+          <p>Remoção técnica de materiais saturados até atingir solo adequado para fundações seguras e duráveis.</p>
         </div>
       </div>
-
-      <div class="serv-card fi fi-d3">
-        <div class="serv-img">
-          <img src="assets/photos/colheita-noturna.jpg" alt="Locação de Equipamentos" loading="lazy"/>
-          <div class="serv-icon">
-            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-          </div>
+      <div class="serv-card reveal reveal-d3">
+        <div class="serv-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
         </div>
         <div class="serv-body">
-          <h3 class="serv-title">Locação de Equipamentos</h3>
-          <p class="serv-desc">Uma solução essencial para as necessidades temporárias de uma obra, quando não é viável optar pela compra.</p>
+          <h3>Locação de Equipamentos</h3>
+          <p>Frota moderna e diversificada para atender operações temporárias com eficiência e economia operacional.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <!-- ══════ PORTFÓLIO ══════ -->
-<section id="portfolio" class="section">
+<section id="portfolio" class="section section-alt">
   <div class="container">
-    <h2 class="sec-title fi">Principais <span class="green">Obras</span></h2>
-    <p class="sec-sub fi fi-d1">Atuamos em todo o Brasil com excelência</p>
-    <div class="portfolio-grid fi">
-      <div class="port-item"><img src="assets/pptx/image18.jpeg" alt="Obra 1"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image19.jpeg" alt="Obra 2"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image22.jpeg" alt="Obra 3"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image23.jpeg" alt="Obra 4"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image22.jpeg" alt="Obra 5"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image23.jpeg" alt="Obra 6"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image24.jpeg" alt="Obra 7"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image25.jpeg" alt="Obra 8"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image29.jpeg" alt="Obra 9"  loading="lazy"/></div>
-      <div class="port-item"><img src="assets/pptx/image27.jpg"  alt="Obra 10" loading="lazy"/></div>
+    <div class="sec-head reveal">
+      <span class="tag">Nosso Portfólio</span>
+      <h2>Principais <span style="color:var(--green)">Obras</span></h2>
+      <p>Atuação em projetos de infraestrutura e gestão florestal em todo o Brasil.</p>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="port-item">
+        <img src="assets/pptx/image18.jpeg" alt="Obra – pátio de toras" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/pptx/image19.jpeg" alt="Obra – carregamento" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/pptx/image22.jpeg" alt="Obra – terraplenagem" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/pptx/image23.jpeg" alt="Obra – equipe campo" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/pptx/image24.jpeg" alt="Obra – supressão" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/pptx/image25.jpeg" alt="Obra – plantio" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/pptx/image29.jpeg" alt="Obra – colheita" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/pptx/image31.jpeg" alt="Obra – transporte" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
+      <div class="port-item">
+        <img src="assets/photos/patio-toras.jpg" alt="Obra – pátio industrial" loading="lazy"/>
+        <div class="port-overlay"><svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ POR QUE ESCOLHER ══════ -->
-<section id="porque">
+<!-- ══════ DIFERENCIAIS ══════ -->
+<section id="diferenciais">
   <div class="container">
-    <h2 class="porque-title fi">Por Que Escolher a Arruda</h2>
-    <div class="porque-grid">
-      <div class="porque-card fi">
-        <div class="porque-icon">
+    <h2 class="dif-title reveal">Por Que Escolher a <span style="color:#4cd98a">Arruda Serviços</span></h2>
+    <div class="dif-grid">
+      <div class="dif-card reveal">
+        <div class="dif-icon">
           <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
         </div>
-        <h3 class="porque-card-title">Experiência Comprovada</h3>
-        <p class="porque-card-desc">Mais de 20 anos de atuação no mercado, entregando resultados consistentes e de qualidade em todo o Brasil.</p>
+        <h3>Experiência Comprovada</h3>
+        <p>Mais de duas décadas entregando resultados sólidos e consistentes em projetos de infraestrutura.</p>
       </div>
-      <div class="porque-card fi fi-d1">
-        <div class="porque-icon">
+      <div class="dif-card reveal reveal-d1">
+        <div class="dif-icon">
           <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
         </div>
-        <h3 class="porque-card-title">Equipe Qualificada</h3>
-        <p class="porque-card-desc">Profissionais altamente capacitados e comprometidos com a excelência em cada projeto realizado.</p>
+        <h3>Equipe Especializada</h3>
+        <p>Profissionais altamente capacitados e comprometidos com cada etapa do projeto.</p>
       </div>
-      <div class="porque-card fi fi-d2">
-        <div class="porque-icon">
+      <div class="dif-card reveal reveal-d2">
+        <div class="dif-icon">
           <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
         </div>
-        <h3 class="porque-card-title">Frota Moderna</h3>
-        <p class="porque-card-desc">Equipamentos diversificados, tecnológicos e bem mantidos para máxima eficiência em cada operação.</p>
+        <h3>Frota Moderna</h3>
+        <p>Equipamentos robustos, diversificados e constantemente revisados para máxima eficiência.</p>
       </div>
-      <div class="porque-card fi fi-d3">
-        <div class="porque-icon">
+      <div class="dif-card reveal reveal-d3">
+        <div class="dif-icon">
           <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.34L5.71 21l1-1C7.38 19.33 7.5 19 8 19h1c4 0 5-3 8-3 1.66 0 3-.17 3-2 0-2.5-1.5-6-3-6z"/></svg>
         </div>
-        <h3 class="porque-card-title">Compromisso Ambiental</h3>
-        <p class="porque-card-desc">Respeito ao meio ambiente e cumprimento rigoroso da legislação ambiental em todas as nossas operações.</p>
+        <h3>Compromisso Ambiental</h3>
+        <p>Atuação responsável e alinhada às normas ambientais vigentes em cada operação.</p>
       </div>
     </div>
   </div>
@@ -589,48 +796,62 @@
 <!-- ══════ CONTATO ══════ -->
 <section id="contato" class="section">
   <div class="container">
+    <div class="sec-head reveal">
+      <span class="tag">Fale Conosco</span>
+      <h2>Pronto para iniciar <span style="color:var(--green)">seu projeto?</span></h2>
+      <p>Solicite uma consultoria gratuita com nossa equipe especializada.</p>
+    </div>
     <div class="contato-grid">
 
       <!-- Formulário -->
-      <div class="fi">
-        <h2 class="form-title">Pronto para Começar?</h2>
-        <p class="form-sub">Entre em contato conosco para uma consultoria gratuita</p>
+      <div class="form-wrap reveal">
         <form id="contactForm" novalidate>
-          <!-- Linha 1: Nome | Email | Telefone -->
-          <div class="form-row3">
-            <div class="form-group" style="margin-bottom:0">
-              <label for="nome">Nome completo</label>
-              <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
+          <div class="form-row2">
+            <div class="form-group">
+              <label for="nome">Nome *</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required/>
             </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="seu@email.com" required />
-            </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label for="tel">Telefone</label>
-              <input type="tel" id="tel" name="tel" placeholder="(11) 99999-9999" />
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="seu@email.com" required/>
             </div>
           </div>
-          <!-- Mensagem -->
+          <div class="form-row2">
+            <div class="form-group">
+              <label for="tel">Telefone</label>
+              <input type="tel" id="tel" name="tel" placeholder="(11) 99999-9999"/>
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa"/>
+            </div>
+          </div>
           <div class="form-group">
-            <label for="msg">Mensagem</label>
-            <textarea id="msg" name="msg" placeholder="Descreva seu projeto ou dúvida..." required></textarea>
+            <label for="msg">Mensagem *</label>
+            <textarea id="msg" name="msg" placeholder="Descreva seu projeto ou necessidade..." required></textarea>
           </div>
           <label class="form-check">
-            <input type="checkbox" name="comunicacoes" />
+            <input type="checkbox" name="lgpd"/>
             Aceito receber comunicações da Arruda Serviços
           </label>
-          <button type="submit" class="btn btn-green btn-submit">Enviar</button>
+          <button type="submit" class="btn btn-primary btn-submit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/></svg>
+            Solicitar Orçamento
+          </button>
           <div id="formMsg"></div>
         </form>
       </div>
 
       <!-- Informações -->
-      <div class="fi fi-d1">
-        <h3 class="info-title">Entre em Contato</h3>
+      <div class="info-side reveal reveal-d1">
+        <h3>Informações de Contato</h3>
+        <a href="https://wa.me/5511996716568" class="whatsapp-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp: (11) 99671-6568
+        </a>
         <ul class="info-list">
           <li class="info-item">
-            <div class="info-icon">
+            <div class="info-icon-wrap">
               <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
             </div>
             <div>
@@ -639,7 +860,7 @@
             </div>
           </li>
           <li class="info-item">
-            <div class="info-icon">
+            <div class="info-icon-wrap">
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </div>
             <div>
@@ -648,7 +869,7 @@
             </div>
           </li>
           <li class="info-item">
-            <div class="info-icon">
+            <div class="info-icon-wrap">
               <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             </div>
             <div>
@@ -657,8 +878,16 @@
             </div>
           </li>
         </ul>
-        <div class="info-img">
-          <img src="assets/pptx/image36.jpeg" alt="Sede Arruda Serviços" loading="lazy"/>
+        <div class="social-row">
+          <a href="#" class="soc-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="soc-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="soc-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
         </div>
       </div>
 
@@ -670,102 +899,119 @@
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <!-- Col 1: Logo -->
       <div>
-        <div class="footer-logo">
-          <img src="assets/logo-arruda.png" alt="Arruda Serviços" />
-          <div class="footer-logo-text">ARRUDA <span>SERVIÇOS</span></div>
+        <div class="foot-logo">
+          <img src="assets/logo-arruda.png" alt="Arruda Serviços"/>
+          <div class="foot-logo-text">ARRUDA <span>SERVIÇOS</span></div>
         </div>
-        <p class="footer-tagline">Desde 2001, oferecendo soluções profissionais em supressão vegetal, terraplenagem e infraestrutura com excelência e respeito ao meio ambiente.</p>
+        <p class="foot-tagline">Desde 2001, referência em supressão vegetal, terraplenagem e gestão florestal. Excelência operacional em todo o Brasil.</p>
       </div>
-      <!-- Col 2: Links -->
       <div>
-        <div class="footer-col-title">Links Rápidos</div>
-        <ul class="footer-links">
+        <div class="foot-col-title">Navegação</div>
+        <ul class="foot-links">
           <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#mvv">Missão e Valores</a></li>
           <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#portfolio">Obras</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </div>
-      <!-- Col 3: Social -->
       <div>
-        <div class="footer-col-title">Siga-nos</div>
-        <div class="social-row">
-          <a href="#" class="social-btn" aria-label="LinkedIn">
+        <div class="foot-col-title">Siga-nos</div>
+        <div class="foot-social">
+          <a href="#" class="foot-soc" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a href="#" class="social-btn" aria-label="Facebook">
+          <a href="#" class="foot-soc" aria-label="Facebook">
             <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
           </a>
-          <a href="#" class="social-btn" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="white" stroke="none"/></svg>
+          <a href="#" class="foot-soc" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="rgba(255,255,255,.7)" stroke="none"/></svg>
           </a>
         </div>
       </div>
-      <!-- Col 4: Contato -->
       <div>
-        <div class="footer-col-title">Contato</div>
-        <div class="footer-contact">
-          <div class="footer-contact-item">
-            <svg class="footer-contact-icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <span class="footer-contact-text">(11) 99671-6568</span>
+        <div class="foot-col-title">Contato</div>
+        <div class="foot-contact">
+          <div class="foot-contact-item">
+            <svg class="foot-contact-icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <span class="foot-contact-text">(11) 99671-6568</span>
           </div>
-          <div class="footer-contact-item">
-            <svg class="footer-contact-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            <span class="footer-contact-text">contato@arrudaservicos.com.br</span>
+          <div class="foot-contact-item">
+            <svg class="foot-contact-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span class="foot-contact-text">contato@arrudaservicos.com.br</span>
+          </div>
+          <div class="foot-contact-item">
+            <svg class="foot-contact-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span class="foot-contact-text">Rochedo/SP</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container">© 2026 Arruda Serviços. Todos os direitos reservados.</div>
+    <div class="footer-bottom">
+      <span>© 2026 Arruda Serviços. Todos os direitos reservados.</span>
+      <span>Desenvolvido com excelência</span>
+    </div>
   </div>
 </footer>
 
 <script>
-  /* HAMBURGER */
+  /* ── HAMBURGER ── */
   const ham = document.getElementById('hamburger');
-  const mob = document.getElementById('mobileMenu');
+  const mob = document.getElementById('mobileNav');
   ham.addEventListener('click', () => {
     const open = mob.classList.toggle('open');
+    ham.classList.toggle('open', open);
     ham.setAttribute('aria-expanded', open);
   });
-  document.querySelectorAll('.mobile-menu .ml, .mobile-menu .btn').forEach(l =>
-    l.addEventListener('click', () => { mob.classList.remove('open'); ham.setAttribute('aria-expanded', false); })
-  );
+  mob.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+    mob.classList.remove('open');
+    ham.classList.remove('open');
+    ham.setAttribute('aria-expanded', false);
+  }));
 
-  /* FADE-IN */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fi').forEach(el => io.observe(el));
-
-  /* ACTIVE NAV */
-  const secs = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a');
+  /* ── HEADER SCROLL ── */
   window.addEventListener('scroll', () => {
-    let cur = '';
-    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
-    links.forEach(l => { l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--green)' : ''; });
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  /* FORM */
+  /* ── HERO PARALLAX LOAD ── */
+  window.addEventListener('load', () => {
+    document.getElementById('hero').classList.add('loaded');
+  });
+
+  /* ── FADE-IN ON SCROLL ── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── ACTIVE NAV ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    navLinks.forEach(l => {
+      const active = l.getAttribute('href') === '#' + cur;
+      l.style.color = active ? 'var(--green)' : '';
+    });
+  }, { passive: true });
+
+  /* ── FORM ── */
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const msg = document.getElementById('formMsg');
-    const nome = document.getElementById('nome').value.trim();
+    const el = document.getElementById('formMsg');
+    const nome  = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
-    const texto = document.getElementById('msg').value.trim();
-    if (!nome || !email || !texto) {
-      msg.style.display = 'block';
-      msg.style.cssText = 'display:block;background:#FFF3E0;color:#E65100;border:1px solid #FFCC80;padding:12px 16px;border-radius:8px;font-size:.85rem;margin-top:12px;';
-      msg.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+    const msg   = document.getElementById('msg').value.trim();
+    if (!nome || !email || !msg) {
+      el.style.cssText = 'display:block;background:#FFF3E0;color:#E65100;border:1px solid #FFCC80;padding:14px 18px;border-radius:10px;font-size:.875rem;margin-top:14px;';
+      el.textContent = 'Por favor, preencha todos os campos obrigatórios.';
       return;
     }
-    msg.style.cssText = 'display:block;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:12px 16px;border-radius:8px;font-size:.85rem;margin-top:12px;';
-    msg.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
+    el.style.cssText = 'display:block;background:#E6F7F0;color:#007a42;border:1px solid #A5D6A7;padding:14px 18px;border-radius:10px;font-size:.875rem;margin-top:14px;';
+    el.textContent = '✓ Mensagem enviada com sucesso! Nossa equipe entrará em contato em breve.';
     this.reset();
   });
 </script>
